@@ -96,7 +96,7 @@ namespace obras_mvc_ef.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ArtistaId")
+                    b.Property<Guid>("ArtistaID")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Estilo")
@@ -116,7 +116,7 @@ namespace obras_mvc_ef.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArtistaId");
+                    b.HasIndex("ArtistaID");
 
                     b.ToTable("Obras");
                 });
@@ -140,7 +140,9 @@ namespace obras_mvc_ef.Migrations
                 {
                     b.HasOne("obras_mvc_ef.Models.Artista", "Artista")
                         .WithMany()
-                        .HasForeignKey("ArtistaId");
+                        .HasForeignKey("ArtistaID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Artista");
                 });
