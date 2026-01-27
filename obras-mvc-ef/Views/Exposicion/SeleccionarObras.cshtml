@@ -1,0 +1,32 @@
+﻿@model List<Obras>
+
+<h1>Lista de obras a seleccionar</h1>
+<form asp-action="SeleccionarObras" method="post">
+
+    <input type="hidden" name="expoId" value="@ViewBag.idExpo" />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Imagen</th>
+                <th>Selección</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obra in Model)
+            {
+                <tr>
+                    <td>@obra.Titulo</td>
+                    @* <td>@obra.Artista.Nombre</td> *@
+                    <td><img src="@obra.UrlImagen" height="50" /></td>
+                    <td>
+                        <input type="checkbox" class="form-check" name="obraIds" value="@obra.Id" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Aceptar</button>
+
+</form>
