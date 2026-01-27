@@ -34,6 +34,7 @@ namespace obras_mvc_ef.Controllers
             }
 
             var exposicion = await _context.Exposiciones
+                .Include(e =>e.ObrasExpuestas)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (exposicion == null)
             {
@@ -160,6 +161,29 @@ namespace obras_mvc_ef.Controllers
             ViewBag.IdExpo = id;
             var obras = await _context.Obras.ToListAsync();
             return View(obras);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SeleccionObras(int expoId, List<Guid> obraIds)
+        {
+            var expo = _context.Exposiciones
+                .Include(e => e.ObrasExpuestas)
+                .FirstOrDefault(e => e.Id == expoId);
+
+            if (expo == null)
+                return NotFound();
+
+            foreach (var id in obraIds)
+            {
+                var obra = new Obras { Id = id };
+                _context.Attach(obra);
+                if (expo.ObrasExpuestas == null)
+                    expo.ObrasExpuestas = new List<Obras>();
+                expo.ObrasExpuestas.Add(obra);
+            }
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
     }
 }

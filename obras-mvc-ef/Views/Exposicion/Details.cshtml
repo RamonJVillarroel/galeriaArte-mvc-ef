@@ -35,3 +35,31 @@
     <a asp-action="Index">Back to List</a> |
     <a asp-action="SeleccionarObras" asp-route-id=@Model.Id>Seleccionar obras</a>
 </div>
+
+
+@if (Model.ObrasExpuestas == null)
+{
+    <p>No hay obras publicadas</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Imagen</th>
+                <th>Quitar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obra in Model.ObrasExpuestas)
+            {
+                <tr>
+                    <td>@obra.Titulo</td>
+                    <td><img src="@obra.UrlImagen" height="50" /></td>
+                    <td><a asp-action="QuitarObra" asp-route-idExpo="@Model.Id" asp-route-idObra="@obra.Id" class="btn btn-outline-danger">Eliminar</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

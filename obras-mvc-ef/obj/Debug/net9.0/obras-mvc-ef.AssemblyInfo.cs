@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("obras-mvc-ef")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2d6e7a2c50468f7811510e93c0d698c301e2a766")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+866e1809c90a01f32689dff5b784da54b9744d8f")]
 [assembly: System.Reflection.AssemblyProductAttribute("obras-mvc-ef")]
 [assembly: System.Reflection.AssemblyTitleAttribute("obras-mvc-ef")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
