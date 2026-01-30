@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Composition;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Versioning;
 using obras_mvc_ef.Data;
 using obras_mvc_ef.Models;
 
@@ -155,11 +157,13 @@ namespace obras_mvc_ef.Controllers
             return _context.Exposiciones.Any(e => e.Id == id);
         }
         [HttpGet]
-        public async Task<IActionResult> SeleccionarObras(string id)
+        public async Task<IActionResult> SeleccionarObras(int id)
         {
             //Pasa mano para seguir teniendo el Id de la expo
             ViewBag.IdExpo = id;
-            var obras = await _context.Obras.ToListAsync();
+            var obras = await _context.Obras
+                .Where(o => !o.ExposicionesObras.Any(e => e.Id == id))
+                .ToListAsync();
             return View(obras);
         }
 
@@ -185,5 +189,21 @@ namespace obras_mvc_ef.Controllers
 
             return RedirectToAction("Index");
         }
+        public async Task<IActionResult> QuitarObra(int idExpo, Guid idObra)
+        {
+            var expo =  _context.Exposiciones
+                .Where(e => e.Id == idExpo)
+                .Include(e => e.ObrasExpuestas)
+                .FirstOrDefault();
+
+            if (expo == null || expo.ObrasExpuestas == null) return NotFound();
+
+            var obra = expo.ObrasExpuestas.FirstOrDefault(o => o.Id == idObra);
+            expo.ObrasExpuestas.Remove(obra);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { id = idExpo });
+        }
+
     }
 }

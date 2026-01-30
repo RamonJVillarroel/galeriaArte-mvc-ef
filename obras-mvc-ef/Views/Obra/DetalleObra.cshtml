@@ -7,7 +7,11 @@
     <div class="col">
         <h3>@Model.Titulo</h3>
         <p>Estilo: @Model.Estilo</p>
-        <a asp-controller="Home" asp-action="Index" class="btn btn-warning m-1"> Volver</a>
+        <p>
+            Artista: @Model.Artista.Nombre
+            País: @Model.Artista.Pais
+        </p>
+        <a asp-controller="Exposicion" asp-action="Details" asp-route-id="@ViewBag.idExpo" class="btn btn-warning m-1"> Volver a la expo</a>
     </div>
     
 </div>

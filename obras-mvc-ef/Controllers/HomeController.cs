@@ -19,9 +19,15 @@ namespace obras_mvc_ef.Controllers
         public async Task<IActionResult> Index()
         {
             var obras = await _context.Obras
-                .Take(6)
-                .ToListAsync();
-            return View(obras);
+                 .Take(6)
+                 .Include(o => o.Artista)
+                 .ToListAsync();
+
+            var expos = await _context.Exposiciones.ToListAsync();
+
+            var homeModel = new HomeViewModel { Exposiciones = expos, Obras = obras };
+
+            return View(homeModel);
         }
 
         public IActionResult Privacy()

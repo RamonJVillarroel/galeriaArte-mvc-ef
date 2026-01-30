@@ -15,12 +15,14 @@ namespace obras_mvc_ef.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> DetalleObra(string id)
+        public async Task<IActionResult> DetalleObra(string id, int idExpo)
         {
-            var obra = await _context.Obras.FirstOrDefaultAsync(O => O.Id.ToString() == id);
-
+            ViewBag.idExpo = idExpo;
+            var obra = await _context.Obras
+                .Include(o => o.Artista)
+                .FirstOrDefaultAsync(o => o.Id.ToString() == id);
             return View(obra);
-        } 
+        }
 
     }
 }
