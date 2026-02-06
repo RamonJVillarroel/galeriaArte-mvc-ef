@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("obras-mvc-ef")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eb3efce9a0386bd761db1cf973a0951b429efc73")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f351495de2210d1876a23e6728c7c9040c2d29d")]
 [assembly: System.Reflection.AssemblyProductAttribute("obras-mvc-ef")]
 [assembly: System.Reflection.AssemblyTitleAttribute("obras-mvc-ef")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

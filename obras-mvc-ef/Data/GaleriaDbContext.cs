@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using obras_mvc_ef.Models;
 
 namespace obras_mvc_ef.Data
 {
-    public class GaleriaDbContext : DbContext
+    public class GaleriaDbContext : IdentityDbContext
     {
         public GaleriaDbContext(DbContextOptions options) : base(options) { } 
         
@@ -14,6 +15,9 @@ namespace obras_mvc_ef.Data
         //arreglo de db:
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Tener cuidado cuando ya se uso el Onmodelcrating
+            //El problema sera solucionado si se agrega la siguiente linea
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Exposicion>().HasData(
                 new Exposicion
                 {
