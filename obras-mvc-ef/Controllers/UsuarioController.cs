@@ -7,7 +7,7 @@ using obras_mvc_ef.Models;
 
 namespace obras_mvc_ef.Controllers
 {
-    [Authorize(Roles = Roles.Admin)]
+    
     public class UsuarioController : Controller
     {
 
@@ -20,7 +20,7 @@ namespace obras_mvc_ef.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
-
+       
         public async Task<IActionResult> Index()
         {
             //pasamanos de usuarios a view model
@@ -42,6 +42,7 @@ namespace obras_mvc_ef.Controllers
 
             return View(usuarios);
         }
+        
         //Esta es la funcionalidad para crear roles
         public async Task<IActionResult> PermisoAdmin(UsuarioVM vm)
         {

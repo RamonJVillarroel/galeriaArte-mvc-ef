@@ -4,11 +4,16 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Lista de exposiciones</h1>
 
-<p>
+@if (User.IsInRole(Roles.Admin))
+{
+  <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -26,7 +31,8 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+       
+            <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
@@ -36,10 +42,20 @@
             <td>
                 @Html.DisplayFor(modelItem => item.FechaFin)
             </td>
+
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <div>
+                        <a asp-action="Details" asp-route-id="@item.Id">Detalle</a> 
+                        @if (User.IsInRole(Roles.Admin))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        }
+                </div>
+             
+                
+                
+                
             </td>
         </tr>
 }

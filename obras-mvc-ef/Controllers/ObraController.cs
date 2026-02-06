@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using obras_mvc_ef.Data;
+using obras_mvc_ef.Models;
 
 namespace obras_mvc_ef.Controllers
 {
+    [Authorize]
     public class ObraController : Controller
     {
         private readonly GaleriaDbContext _context;

@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using obras_mvc_ef.Data;
 using obras_mvc_ef.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace obras_mvc_ef.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     public class ObrasController : Controller
     {
         private readonly GaleriaDbContext _context;

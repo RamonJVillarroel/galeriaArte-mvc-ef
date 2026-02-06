@@ -1,17 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Composition;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Versioning;
 using obras_mvc_ef.Data;
 using obras_mvc_ef.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Composition;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace obras_mvc_ef.Controllers
 {
+    
     public class ExposicionController : Controller
     {
         private readonly GaleriaDbContext _context;
@@ -20,13 +23,13 @@ namespace obras_mvc_ef.Controllers
         {
             _context = context;
         }
-
+        [Authorize]
         // GET: Exposicion
         public async Task<IActionResult> Index()
         {
             return View(await _context.Exposiciones.ToListAsync());
         }
-
+        [Authorize]
         // GET: Exposicion/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -45,7 +48,7 @@ namespace obras_mvc_ef.Controllers
 
             return View(exposicion);
         }
-
+        [Authorize(Roles = Roles.Admin)]
         // GET: Exposicion/Create
         public IActionResult Create()
         {
@@ -67,7 +70,7 @@ namespace obras_mvc_ef.Controllers
             }
             return View(exposicion);
         }
-
+        
         // GET: Exposicion/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -83,7 +86,7 @@ namespace obras_mvc_ef.Controllers
             }
             return View(exposicion);
         }
-
+       
         // POST: Exposicion/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -118,7 +121,7 @@ namespace obras_mvc_ef.Controllers
             }
             return View(exposicion);
         }
-
+        [Authorize(Roles = Roles.Admin)]
         // GET: Exposicion/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -136,7 +139,7 @@ namespace obras_mvc_ef.Controllers
 
             return View(exposicion);
         }
-
+        [Authorize(Roles = Roles.Admin)]
         // POST: Exposicion/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
